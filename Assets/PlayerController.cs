@@ -12,12 +12,11 @@ public class PlayerController : MonoBehaviour {
 	public float beginTime;
 	public float wrestleTime;
 
-
-	private Rigidbody rb;
+	//private Rigidbody2D rb;
 
 	void Start ()
 	{
-		rb = GetComponent<Rigidbody>();
+		//rb = GetComponent<Rigidbody2D>();
 	}
 
 	void FixedUpdate ()
@@ -47,7 +46,7 @@ public class PlayerController : MonoBehaviour {
 			movement_v = 0.0f;
 		}
 
-		this.GetComponent<Rigidbody> ().velocity = new Vector2 (4.0f + movement_h, movement_v);
+		GetComponent<Rigidbody2D> ().velocity = new Vector2 (4.0f + movement_h, movement_v);
 
 	}
 
