@@ -5,11 +5,11 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed;
 
-	private Rigidbody rb;
+	private Rigidbody2D rb;
 
 	void Start ()
 	{
-		rb = GetComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody2D>();
 	}
 
 	void FixedUpdate ()
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 
-		Vector3 movement = new Vector3 (moveHorizontal, moveVertical, 0.0f);
+		Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
 
 		rb.AddForce (movement * speed);
 	}
