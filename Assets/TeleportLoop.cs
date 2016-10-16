@@ -2,11 +2,18 @@
 using System.Collections;
 
 public class TeleportLoop : MonoBehaviour {
+
+	public ArrayList RBC;
+	public ArrayList WBC;
+	public ArrayList BAC;
+	public ArrayList spawners;
     public Transform Spawn;
-    public GameObject Bacteria;
+    public GameObject spawner_cell;
     public PlayerController player;
-	public GameObject blood_cell;
-    public float diff_num = 0.25f;
+	public GameObject player_cell;
+	public bool initial_loop = true;
+
+    public float difficulty_num = 0.25f;
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -16,14 +23,29 @@ public class TeleportLoop : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player"))
         {
-            blood_cell = GameObject.FindGameObjectWithTag("Player");
+            player_cell = GameObject.FindGameObjectWithTag("Player");
+			if (initial_loop) {
+				spawners = GameObject.FindGameObjectsWithTag ("Initial Spawner");
+				for (var i = 0; i < spawners.length; i++)
+					Destroy (spawners [i]);
+				initial_loop = false;
+			}
+			RBC =  GameObject.FindGameObjectsWithTag ("RedBloodCell");
+			for(var i = 0 ; i < RBC.length ; i ++)
+				Destroy(RBC[i]);
+			RBC =  GameObject.FindGameObjectsWithTag ("WhiteBloodCell");
+			for(var i = 0 ; i < WBC.length ; i ++)
+				Destroy(WBC[i]);
+			RBC =  GameObject.FindGameObjectsWithTag ("Bacteria");
+			for(var i = 0 ; i < BAC.length ; i ++)
+				Destroy(BAC[i]);
             player.wigglesRemaining = 0;
             Destroy(player.GetComponent<FixedJoint2D>());
-            blood_cell.transform.position = new Vector2(0, other.transform.position.y);
+            player_cell.transform.position = new Vector2(0, other.transform.position.y);
             player.lap_num += 1;
             player.lapText.text = "Lap: " + player.lap_num;
 
-            InvokeRepeating("makeenemy", 0f, Random.Range(2.5f, 5.0f));
+            InvokeRepeating("spawn_cells", 0f, Random.Range(2.25f, 5.0f));
             if (player.lap_num % 2 == 0)
             {
                 diff_num -= 0.25f;
@@ -31,9 +53,9 @@ public class TeleportLoop : MonoBehaviour {
         }
     }
 
-    void makeenemy()
+    void spawn_cells()
     {
-        Instantiate(Bacteria, Spawn.position, Spawn.rotation);
+		Instantiate(spawner_cell, Spawn.position, Spawn.rotation);
 
     }
 
