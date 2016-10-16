@@ -26,18 +26,18 @@ public class TeleportLoop : MonoBehaviour {
             player_cell = GameObject.FindGameObjectWithTag("Player");
 			if (initial_loop) {
 				spawners = GameObject.FindGameObjectsWithTag ("Initial Spawner");
-				for (var i = 0; i < spawners.length; i++)
+				for (var i = 0; i < spawners.Length; i++)
 					Destroy (spawners [i]);
 				initial_loop = false;
 			}
 			RBC =  GameObject.FindGameObjectsWithTag ("RedBloodCell");
-			for(var i = 0 ; i < RBC.length ; i ++)
+			for(var i = 0 ; i < RBC.Length ; i ++)
 				Destroy(RBC[i]);
 			RBC =  GameObject.FindGameObjectsWithTag ("WhiteBloodCell");
-			for(var i = 0 ; i < WBC.length ; i ++)
+			for(var i = 0 ; i < WBC.Length ; i ++)
 				Destroy(WBC[i]);
 			RBC =  GameObject.FindGameObjectsWithTag ("Bacteria");
-			for(var i = 0 ; i < BAC.length ; i ++)
+			for(var i = 0 ; i < BAC.Length ; i ++)
 				Destroy(BAC[i]);
             player.wigglesRemaining = 0;
             Destroy(player.GetComponent<FixedJoint2D>());
