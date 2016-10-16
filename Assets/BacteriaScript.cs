@@ -34,8 +34,8 @@ public class BacteriaScript : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D c) {
 		if (!attached) {
-			attached = true;
 			if (c.gameObject.CompareTag ("Player") && c.gameObject.GetComponent<PlayerController> ().infection < 100.0f) {
+				attached = true;
 				var joint = c.gameObject.AddComponent<FixedJoint2D> ();
 				joint.connectedBody = this.rb;
 				c.gameObject.GetComponent<PlayerController> ().wigglesRemaining += 10;

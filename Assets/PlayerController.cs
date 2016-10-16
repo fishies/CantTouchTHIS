@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour {
 					wigglesRemaining -= 1;
 				}
 			} else if (gameObject.GetComponent<FixedJoint2D> () != null) {
-				
 				Destroy (gameObject.GetComponent<FixedJoint2D>());
 			}
 

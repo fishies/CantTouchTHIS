@@ -31,4 +31,10 @@ public class WhiteBloodCellScript : MonoBehaviour {
 		}
 		rb.AddForce (drift+moveMod*((Vector2)(target.transform.position-transform.position)).normalized);
 	}
+
+	void OnCollisionEnter2D(Collision2D c) {
+		if (c.gameObject.CompareTag ("Player") && c.gameObject.GetComponent<PlayerController> ().infection >= 100.0f) {
+			c.gameObject.GetComponent<PlayerController> ().gameEnd = true;
+		}
+	}
 }
