@@ -11,7 +11,7 @@ public class BacteriaScript : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 		moveMod = 1.0f;
-		drift.x = -1.125f;
+		drift.x = -2f;
 		drift.y = 0;
 	}
 	
@@ -28,5 +28,13 @@ public class BacteriaScript : MonoBehaviour {
 			}
 		}
 		rb.AddForce (drift+moveMod*((Vector2)(target.transform.position-transform.position)).normalized);
-	}
-}
+    }
+    void OnCollisionEnter2D(Collision2D c)
+    {
+           
+           var joint = gameObject.AddComponent<FixedJoint2D>();
+            joint.connectedBody = c.rigidbody;
+    }
+
+
+    }
