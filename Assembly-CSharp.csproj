@@ -47,7 +47,10 @@
   <ItemGroup>
      <Compile Include="Assets\BacteriaScript.cs" />
      <Compile Include="Assets\PlayerController.cs" />
+     <Compile Include="Assets\TeleportLoop.cs" />
      <Compile Include="Assets\WhiteBloodCellScript.cs" />
+     <Compile Include="Assets\destroystuff.cs" />
+     <Compile Include="Assets\stickbacteria.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
