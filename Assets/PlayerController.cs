@@ -20,11 +20,16 @@ public class PlayerController : MonoBehaviour
 	public Text lapText;
 	public Text finalScoreText;
 
+	public Sprite rbc2;
+	public Sprite rbc3;
+
 	private Rigidbody2D rb;
+	private SpriteRenderer sr;
 
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D> ();
+		sr = GetComponentInChildren<SpriteRenderer> ();
 		infection = 0.0f;
 		lap_num = 0;
 		SetInfectionText ();
@@ -37,18 +42,24 @@ public class PlayerController : MonoBehaviour
 	void Update ()
 	{
 		if (!gameEnd) {
+			SetScoreText ();
 			if (wigglesRemaining > 0) {
 				infection += 0.125f;
+				SetInfectionText ();
+				if (infection >= 100.0f) {
+					sr.sprite = rbc3;
+					wigglesRemaining = 0;
+				} else if (infection >= 50.0f) {
+					sr.sprite = rbc2;
+				}
 				if (Input.GetKey (KeyCode.LeftArrow) && wigglesRemaining % 2 == 0)
 					wigglesRemaining -= 1;
 				else if (Input.GetKey (KeyCode.RightArrow) && wigglesRemaining % 2 == 1)
 					wigglesRemaining -= 1;
 			} else if (gameObject.GetComponent<FixedJoint2D> () != null) {
+				Destroy (gameObject.GetComponent<FixedJoint2D> ().connectedBody.gameObject);
 				Destroy (gameObject.GetComponent<FixedJoint2D> ());
 			}
-
-			SetInfectionText ();
-			SetScoreText ();
 		} else {
 			finalScore = score;
 			infectionText.text = "";
