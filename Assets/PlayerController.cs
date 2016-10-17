@@ -25,11 +25,13 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody2D rb;
 	private SpriteRenderer sr;
+	private Animator animator;
 
 	void Start ()
 	{
 		rb = GetComponent<Rigidbody2D> ();
 		sr = GetComponentInChildren<SpriteRenderer> ();
+		animator = GetComponentInChildren<Animator> ();
 		infection = 0.0f;
 		lap_num = 0;
 		SetInfectionText ();
@@ -47,9 +49,11 @@ public class PlayerController : MonoBehaviour
 				infection += 0.125f;
 				SetInfectionText ();
 				if (infection >= 100.0f) {
+					animator.SetInteger ("infectstate", 2);
 					sr.sprite = rbc3;
 					wigglesRemaining = 0;
 				} else if (infection >= 50.0f) {
+					animator.SetInteger ("infectstate", 1);
 					sr.sprite = rbc2;
 				}
 				if (Input.GetKey (KeyCode.LeftArrow) && wigglesRemaining % 2 == 0)
