@@ -23,16 +23,16 @@ public class TeleportLoop : MonoBehaviour
 	{
 		if (other.CompareTag ("Player")) {
 			player_cell = GameObject.FindGameObjectWithTag ("Player");
-			if (initial_loop) {
-				spawners = GameObject.FindGameObjectsWithTag ("Initial Spawner");
-				foreach (GameObject spawner in spawners)
-					Destroy (spawner);
-				initial_loop = false;
-			}
-			foreach (GameObject obj in Object.FindObjectsOfType<GameObject>()) {
-				if (obj.CompareTag ("RedBloodCell") || obj.CompareTag ("WhiteBloodCell") || obj.CompareTag ("Bacteria"))
-					Destroy (obj);
-			}
+//			if (initial_loop) {
+//				spawners = GameObject.FindGameObjectsWithTag ("Initial Spawner");
+//				foreach (GameObject spawner in spawners)
+//					Destroy (spawner);
+//				initial_loop = false;
+//			}
+//			foreach (GameObject obj in Object.FindObjectsOfType<GameObject>()) {
+//				if (obj.CompareTag ("RedBloodCell") || obj.CompareTag ("WhiteBloodCell") || obj.CompareTag ("Bacteria"))
+//					Destroy (obj);
+//			}
 			player.wigglesRemaining = 0;
 			Destroy (player.GetComponent<FixedJoint2D> ());
 			player_cell.transform.position = new Vector2 (0, other.transform.position.y);
